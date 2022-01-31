@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PruebaAPI.Models;
-using System.Diagnostics.CodeAnalysis;
+using Models;
 
-namespace TodoAPI.Models
+namespace DataAccess
 {
     public class TodoContext : DbContext
     {

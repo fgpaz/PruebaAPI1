@@ -1,4 +1,4 @@
-﻿namespace PruebaAPI.Models
+﻿namespace Models
 {
     public class TodoItem
     {
