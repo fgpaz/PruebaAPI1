@@ -22,26 +22,23 @@ namespace PruebaAPI.Controllers
             _todoLogic = todoLogic;
         }
 
-        //// GET: api/TodoItems
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
-        //{
-        //    return await _todoLogic.TodoItems.ToListAsync();
-        //}
+        // GET: api/TodoItems
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems() => await _todoLogic.Get();
 
-        //// GET: api/TodoItems/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
-        //{
-        //    var todoItem = await _todoLogic.TodoItems.FindAsync(id);
+        // GET: api/TodoItems/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
+        {
+            var todoItem = await _todoLogic.GetTodoItem(id);            
 
-        //    if (todoItem == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
 
-        //    return todoItem;
-        //}
+            return todoItem;
+        }
 
         //// PUT: api/TodoItems/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
