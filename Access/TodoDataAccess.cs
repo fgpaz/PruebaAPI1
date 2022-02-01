@@ -14,17 +14,10 @@ namespace DataAccess
         {
             return await _todoContext.TodoItems.ToListAsync();
         }
-        public async Task<TodoItem> GetTodoItem(long id)
+        public async Task<TodoItem?> GetTodoItem(long id)
         {
             var todoItem = _todoContext.TodoItems.FindAsync(id);
-            if (todoItem != null)
-            {
-                return await todoItem;
-            }
-            else {
-                return null;
-            }
-            
+            return (todoItem != null) ? await todoItem : null;
         }
         public async Task<TodoItem> Create(TodoItem todoItem)
         {
@@ -39,7 +32,12 @@ namespace DataAccess
             await _todoContext.SaveChangesAsync();
             return todoItem;
         }
-
-
+        public void EntityS(TodoItem todoItem) => _todoContext.Entry(todoItem).State = EntityState.Modified;
+        public async Task<IAsyncResult> SaveChangesAsync() => await SaveChangesAsync();
+        public async Task<IAsyncResult> DeleteTodoItem(long id) 
+        {
+            _todoContext.TodoItems.Remove(await GetTodoItem(id));
+            return await SaveChangesAsync();
+        }
     }
 }

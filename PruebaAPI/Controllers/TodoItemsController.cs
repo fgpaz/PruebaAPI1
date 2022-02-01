@@ -40,36 +40,37 @@ namespace PruebaAPI.Controllers
             return todoItem;
         }
 
-        //// PUT: api/TodoItems/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
-        //{
-        //    if (id != todoItem.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/TodoItems/5
+        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
+        {
 
-        //    _todoLogic.Entry(todoItem).State = EntityState.Modified;
+            if (id != _todoLogic.GetTodoItem(id).Id)
+            {
+                return BadRequest();
+            }
 
-        //    try
-        //    {
-        //        await _todoLogic.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!TodoItemExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            _todoLogic.EntityS(todoItem);
 
-        //    return NoContent();
-        //}
+            try
+            {
+                await _todoLogic.SaveChanges();
+            }
+            catch (Exception)
+            {
+                if (!await _todoLogic.validarExiste(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
 
         // POST: api/TodoItems
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,24 +82,19 @@ namespace PruebaAPI.Controllers
             return await _todoLogic.Create(todoItem);
         }
 
-        //    // DELETE: api/TodoItems/5
-        //    [HttpDelete("{id}")]
-        //    public async Task<IActionResult> DeleteTodoItem(long id)
-        //    {
-        //        {
-        //            return NotFound();
-        //        }
+        // DELETE: api/TodoItems/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTodoItem(long id)
+        {
+            if (!await _todoLogic.validarExiste(id))
+            {
+                return NotFound();
+            }
 
-        //        _todoLogic.TodoItems.Remove(todoItem);
-        //        await _todoLogic.SaveChangesAsync();
+            await _todoLogic.DeleteTodoItem(id);
+            await _todoLogic.SaveChanges();
 
-        //        return NoContent();
-        //    }
-
-        //    private bool TodoItemExists(long id)
-        //    {
-        //        return _todoLogic.TodoItems.Any(e => e.Id == id);
-        //    }
-        //}
+            return NoContent();
+        }
     }
 }
