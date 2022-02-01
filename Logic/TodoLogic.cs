@@ -12,14 +12,21 @@ namespace Logic
         }
         public async Task<List<TodoItem>> Get() => await _todoDataAccess.Get();
         public async Task<TodoItem?> GetTodoItem(long id) => await _todoDataAccess.GetTodoItem(id);
-        public async Task<TodoItem?> Create(TodoItem todoItem) 
+        public async Task<TodoItem?> Create(TodoItem todoItem)
         {
-            return await (validarExiste(todoItem)) ? null : await _todoDataAccess.Create(todoItem);
+            if (await validarExiste(todoItem))
+            {
+                throw new ExisteTodoConElMismoNombreException
+                {
+                    Details = "Ya existe este item",
+                    StatusCode = 400
+                };
+            }
+            else return await _todoDataAccess.Create(todoItem);
         }
         public async Task<TodoItem> Update(long id, TodoItem todoItem) => await _todoDataAccess.Update(id, todoItem);
         public void EntityS(TodoItem todoItem) => _todoDataAccess.EntityS(todoItem);
-        public async Task SaveChanges() => await _todoDataAccess.SaveChangesAsync();
-        public async Task<bool> validarExiste(TodoItem todoItem) 
+        private async Task<bool> validarExiste(TodoItem todoItem)
         {
             var listadoTodoItem = _todoDataAccess.Get();
             var existe = false;
@@ -29,16 +36,16 @@ namespace Logic
             }
             return existe;
         }
-        public async Task<bool> validarExiste(long id) 
+        public async Task<Object> DeleteTodoItem(long id)
         {
-            var listadoTodoItem = _todoDataAccess.Get();
-            var existe = false;
-            foreach (var item in await listadoTodoItem)
+            if (_todoDataAccess.GetTodoItem(id) == null)
             {
-                if (item.Id == id) existe = true;
-            }
-            return existe;
+                throw new NoExisteElElementoException
+                {
+                    Details = "No existe el elemento a eliminar",
+                    StatusCode = 400
+                };
+            } else return await _todoDataAccess.DeleteTodoItem(id);
         }
-        public async Task<IAsyncResult> DeleteTodoItem(long id) => _todoDataAccess.DeleteTodoItem(id);
     }
 }

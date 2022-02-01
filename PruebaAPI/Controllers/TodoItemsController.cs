@@ -30,46 +30,30 @@ namespace PruebaAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
         {
-            var todoItem = await _todoLogic.GetTodoItem(id);            
-
-            if (todoItem == null)
+            try
             {
-                return NotFound();
+                return await _todoLogic.GetTodoItem(id);
             }
-
-            return todoItem;
+            catch (NoExisteElElementoException e)
+            {
+                return new ObjectResult(new { e.Details }) { StatusCode = e.StatusCode };
+            }
         }
 
         // PUT: api/TodoItems/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTodoItem(long id, TodoItem todoItem)
+        public async Task PutTodoItem([FromRoute] long id, [FromBody] TodoItem todoItem)
         {
-
-            if (id != _todoLogic.GetTodoItem(id).Id)
-            {
-                return BadRequest();
-            }
-
-            _todoLogic.EntityS(todoItem);
-
             try
             {
-                await _todoLogic.SaveChanges();
-            }
-            catch (Exception)
-            {
-                if (!await _todoLogic.validarExiste(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                await _todoLogic.Update(id, todoItem);
 
-            return NoContent();
+            }
+            catch (CustomException e)
+            {
+                new ObjectResult(new { e.Details }) { StatusCode = e.StatusCode };
+            }
         }
 
         // POST: api/TodoItems
@@ -77,24 +61,28 @@ namespace PruebaAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<TodoItem>> PostTodoItem(TodoItem todoItem)
         {
-            //return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
-            //return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
-            return await _todoLogic.Create(todoItem);
+            try
+            {
+                return await _todoLogic.Create(todoItem);
+            }
+            catch (CustomException e)
+            {
+                return new ObjectResult(new { e.Details }) { StatusCode = e.StatusCode };
+            }
         }
 
         // DELETE: api/TodoItems/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTodoItem(long id)
+        public async Task<IActionResult> DeleteTodoItem([FromRoute] long id)
         {
-            if (!await _todoLogic.validarExiste(id))
+            try
             {
-                return NotFound();
+                return (IActionResult)await _todoLogic.DeleteTodoItem(id);
             }
-
-            await _todoLogic.DeleteTodoItem(id);
-            await _todoLogic.SaveChanges();
-
-            return NoContent();
+            catch (NoExisteElElementoException e)
+            {
+                return new ObjectResult(new { e.Details }) { StatusCode = e.StatusCode };
+            }
         }
     }
 }
