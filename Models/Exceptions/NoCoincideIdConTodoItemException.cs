@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.Exceptions
 {
-    public class NoExisteElElementoException : CustomException
+    public class NoCoincideIdConTodoItemException : CustomException
     {
     }
 }

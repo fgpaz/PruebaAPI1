@@ -10,34 +10,44 @@ namespace DataAccess
         {
             _todoContext = todoContext;
         }
+
+        // Para GET
         public async Task<List<TodoItem>> Get()
         {
             return await _todoContext.TodoItems.ToListAsync();
         }
+
+        // Para GET/{id}
         public async Task<TodoItem?> GetTodoItem(long id)
         {
             var todoItem = _todoContext.TodoItems.FindAsync(id);
             return  await todoItem;
         }
+
+        // Para POST
         public async Task<TodoItem> Create(TodoItem todoItem)
         {
             _todoContext.TodoItems.Add(todoItem);
             await _todoContext.SaveChangesAsync();
             return todoItem;
         }
+
+        // Para PUT
         public async Task<TodoItem> Update(long id, TodoItem todoItem)
         {
-
+            //_todoContext.Entry(todoItem).State = EntityState.Modified;
             _todoContext.TodoItems.Update(todoItem);
             await _todoContext.SaveChangesAsync();
             return todoItem;
         }
-        public void EntityS(TodoItem todoItem) => _todoContext.Entry(todoItem).State = EntityState.Modified;
-        public async Task<Object> DeleteTodoItem(long id) 
+
+        // Para DELETE
+        public async Task<TodoItem?> DeleteTodoItem(long id) 
         {
             var todoItem = await GetTodoItem(id);
             if (todoItem != null) _todoContext.TodoItems.Remove(todoItem);
-            return await _todoContext.SaveChangesAsync();
+            await _todoContext.SaveChangesAsync();
+            return todoItem;
         }
     }
 }
