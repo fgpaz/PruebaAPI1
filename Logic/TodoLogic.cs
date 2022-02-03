@@ -35,30 +35,19 @@ namespace Logic
         // Para PUT
         public async Task<TodoItem> Update(long id, TodoItem todoItem)
         {
-           // if (id == todoItem.Id)
-            //{
-                if (_todoDataAccess.GetTodoItem(id) == null)
+            if (_todoDataAccess.GetTodoItem(id) == null)
+            {
+                throw new NoExisteElElementoException
                 {
-                    throw new NoExisteElElementoException
-                    {
-                        Details = "No existe el elemento a eliminar",
-                        StatusCode = 400
-                    };
-                }
-                else
-                {
-                    return await _todoDataAccess.Update(id, todoItem);
-                }
-            //}
-            //else
-            //{
-            //    throw new NoCoincideIdConTodoItemException
-            //    {
-            //        Details = "No coinciden Id con TodoItem a modificar",
-            //        StatusCode = 400
-            //    };
-            //}
-        }        
+                    Details = "No existe el elemento a eliminar",
+                    StatusCode = 404
+                };
+            }
+            else
+            {
+                return await _todoDataAccess.Update(id, todoItem);
+            }
+        }
 
         // Para DELETE
         public async Task<TodoItem?> DeleteTodoItem(long id)
@@ -69,7 +58,7 @@ namespace Logic
                 throw new NoExisteElElementoException
                 {
                     Details = "No existe el elemento a eliminar",
-                    StatusCode = 400
+                    StatusCode = 404
                 };
             }
             else

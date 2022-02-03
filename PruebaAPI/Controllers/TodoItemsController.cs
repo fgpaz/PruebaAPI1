@@ -58,8 +58,8 @@ namespace PruebaAPI.Controllers
         {
             try
             {
-                await _todoLogic.Update(id, todoItem);
-                return NoContent();
+                return await _todoLogic.Update(id, todoItem);
+                 //todoItem;
             }
             catch (CustomException e)
             {

@@ -21,7 +21,7 @@ namespace DataAccess
         public async Task<TodoItem?> GetTodoItem(long id)
         {
             var todoItem = _todoContext.TodoItems.FindAsync(id);
-            return  await todoItem;
+            return await todoItem;
         }
 
         // Para POST
@@ -42,7 +42,7 @@ namespace DataAccess
         }
 
         // Para DELETE
-        public async Task<TodoItem?> DeleteTodoItem(long id) 
+        public async Task<TodoItem?> DeleteTodoItem(long id)
         {
             var todoItem = await GetTodoItem(id);
             if (todoItem != null) _todoContext.TodoItems.Remove(todoItem);
