@@ -3,12 +3,20 @@ using Logic;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-// Add services to the container.
+var Configuration = builder.Configuration;
+builder.Services.AddDbContext<TodoDB>(options =>
+    options.UseMySql(Configuration.GetConnectionString("TodoDB"),
+                      ServerVersion.AutoDetect(Configuration.GetConnectionString("TodoDB"))),
+                  ServiceLifetime.Scoped);
+//Para conectar con DB en memoria
+//builder.Services.AddDbContext<TodoContext>(opt =>
+//    opt.UseInMemoryDatabase("TodoList"));
 
+// Add services to the container
 builder.Services.AddControllers();
-builder.Services.AddDbContext<TodoContext>(opt =>
-    opt.UseInMemoryDatabase("TodoList"));
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -6,8 +6,8 @@ namespace Logic
 {
     public class TodoLogic
     {
-        private readonly TodoDataAccess _todoDataAccess;
-        public TodoLogic(TodoDataAccess todoDataAccess)
+        private readonly MySQLDataAccess _todoDataAccess;
+        public TodoLogic(MySQLDataAccess todoDataAccess)
         {
             _todoDataAccess = todoDataAccess;
         }
