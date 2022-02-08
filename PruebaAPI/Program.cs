@@ -1,15 +1,16 @@
 using DataAccess;
 using Logic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-var Configuration = builder.Configuration;
-builder.Services.AddDbContext<TodoDB>(options =>
-    options.UseMySql(Configuration.GetConnectionString("TodoDB"),
-                      ServerVersion.AutoDetect(Configuration.GetConnectionString("TodoDB"))),
-                  ServiceLifetime.Scoped);
+var ConfigurationConnectionString = builder.Configuration.GetConnectionString("DB");
+builder.Services.AddDbContext<UsuarioDB>(options =>
+    options.UseMySql(ConfigurationConnectionString,
+                      ServerVersion.AutoDetect(ConfigurationConnectionString)),
+                    ServiceLifetime.Scoped);
 //Para conectar con DB en memoria
 //builder.Services.AddDbContext<TodoContext>(opt =>
 //    opt.UseInMemoryDatabase("TodoList"));
@@ -20,8 +21,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<TodoLogic>();
-builder.Services.AddScoped<TodoDataAccess>();
+builder.Services.AddScoped<UsuarioLogic>();
+builder.Services.AddScoped<UsuarioDA>();
 
 var app = builder.Build();
 
@@ -38,5 +39,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGet("/", () => "Hello World!");
+app.UseSwaggerUI();
 
 app.Run();

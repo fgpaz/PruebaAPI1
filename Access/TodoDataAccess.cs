@@ -2,39 +2,39 @@
 {
     public class TodoDataAccess
     {
-        //    private readonly TodoContext _todoContext;
+        //    private readonly TodoContext _todoDb;
         //    public TodoDataAccess(TodoContext todoContext)
         //    {
-        //        _todoContext = todoContext;
+        //        _todoDb = todoContext;
         //    }
 
         //    // Para GET
         //    public async Task<List<TodoItem>> Get()
         //    {
-        //        return await _todoContext.TodoItems.ToListAsync();
+        //        return await _todoDb.TodoItems.ToListAsync();
         //    }
 
         //    // Para GET/{id}
         //    public async Task<TodoItem?> GetTodoItem(long id)
         //    {
-        //        var todoItem = _todoContext.TodoItems.FindAsync(id);
+        //        var todoItem = _todoDb.TodoItems.FindAsync(id);
         //        return await todoItem;
         //    }
 
         //    // Para POST
         //    public async Task<TodoItem> Create(TodoItem todoItem)
         //    {
-        //        _todoContext.TodoItems.Add(todoItem);
-        //        await _todoContext.SaveChangesAsync();
+        //        _todoDb.TodoItems.Add(todoItem);
+        //        await _todoDb.SaveChangesAsync();
         //        return todoItem;
         //    }
 
         //    // Para PUT
         //    public async Task<TodoItem> Update(long id, TodoItem todoItem)
         //    {
-        //        //_todoContext.Entry(todoItem).State = EntityState.Modified;
-        //        _todoContext.TodoItems.Update(todoItem);
-        //        await _todoContext.SaveChangesAsync();
+        //        //_todoDb.Entry(todoItem).State = EntityState.Modified;
+        //        _todoDb.TodoItems.Update(todoItem);
+        //        await _todoDb.SaveChangesAsync();
         //        return todoItem;
         //    }
 
@@ -42,8 +42,8 @@
         //    public async Task<TodoItem?> DeleteTodoItem(long id)
         //    {
         //        var todoItem = await GetTodoItem(id);
-        //        if (todoItem != null) _todoContext.TodoItems.Remove(todoItem);
-        //        await _todoContext.SaveChangesAsync();
+        //        if (todoItem != null) _todoDb.TodoItems.Remove(todoItem);
+        //        await _todoDb.SaveChangesAsync();
         //        return todoItem;
         //    }
     }

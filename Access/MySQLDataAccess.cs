@@ -5,39 +5,42 @@ namespace DataAccess
 {
     public class MySQLDataAccess
     {
-        private readonly TodoContext _todoContext;
-        public MySQLDataAccess(TodoContext todoContext)
+        private readonly TodoDB _todoDB;
+
+        public MySQLDataAccess(TodoDB todoDB)
         {
-            _todoContext = todoContext;
+            _todoDB = todoDB;
         }
+
+        public void SaveChanges() => _todoDB.SaveChanges();
 
         // Para GET
         public async Task<List<TodoItem>> Get()
         {
-            return await _todoContext.TodoItems.ToListAsync();
+            return await _todoDB.todoItems.ToListAsync();
         }
 
         // Para GET/{id}
         public async Task<TodoItem?> GetTodoItem(long id)
         {
-            var todoItem = _todoContext.TodoItems.FindAsync(id);
+            var todoItem = _todoDB.todoItems.FindAsync(id);
             return await todoItem;
         }
 
         // Para POST
         public async Task<TodoItem> Create(TodoItem todoItem)
         {
-            _todoContext.TodoItems.Add(todoItem);
-            await _todoContext.SaveChangesAsync();
+            _todoDB.todoItems.Add(todoItem);
+            await _todoDB.SaveChangesAsync();
             return todoItem;
         }
 
         // Para PUT
         public async Task<TodoItem> Update(long id, TodoItem todoItem)
         {
-            //_todoContext.Entry(todoItem).State = EntityState.Modified;
-            _todoContext.TodoItems.Update(todoItem);
-            await _todoContext.SaveChangesAsync();
+            //_todoDb.Entry(todoItem).State = EntityState.Modified;
+            _todoDB.todoItems.Update(todoItem);
+            await _todoDB.SaveChangesAsync();
             return todoItem;
         }
 
@@ -45,8 +48,8 @@ namespace DataAccess
         public async Task<TodoItem?> DeleteTodoItem(long id)
         {
             var todoItem = await GetTodoItem(id);
-            if (todoItem != null) _todoContext.TodoItems.Remove(todoItem);
-            await _todoContext.SaveChangesAsync();
+            if (todoItem != null) _todoDB.todoItems.Remove(todoItem);
+            await _todoDB.SaveChangesAsync();
             return todoItem;
         }
     }

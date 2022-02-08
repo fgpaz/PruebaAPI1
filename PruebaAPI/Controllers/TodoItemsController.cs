@@ -7,8 +7,8 @@ using Models.Exceptions;
 namespace PruebaAPI.Controllers
 {
 
-    [Route("api/[controller]")]
-    [ApiController]
+    //[Route("api/[controller]")]
+    //[ApiController]
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoLogic _todoLogic;
