@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace Models
 {
@@ -26,8 +20,8 @@ namespace Models
         [Column("fecha_creacion")]
         public DateTime Fecha_creacion { get; set; }
 
-        //[Column("rol")]
-        //public roles Rol { get; set; }
+        [Column("rol")]
+        public string? Rol { get; set; }
 
         [Column("fecha_modificacion")]
         public DateTime Fecha_modificacion { get; set; }

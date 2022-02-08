@@ -1,16 +1,16 @@
 using DataAccess;
 using Logic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-var ConfigurationConnectionString = builder.Configuration.GetConnectionString("DB");
+string connectionString = builder.Configuration.GetConnectionString("DB");
 builder.Services.AddDbContext<UsuarioDB>(options =>
-    options.UseMySql(ConfigurationConnectionString,
-                      ServerVersion.AutoDetect(ConfigurationConnectionString)),
+    options.UseMySql(connectionString,
+                      ServerVersion.AutoDetect(connectionString)),
                     ServiceLifetime.Scoped);
+
 //Para conectar con DB en memoria
 //builder.Services.AddDbContext<TodoContext>(opt =>
 //    opt.UseInMemoryDatabase("TodoList"));
