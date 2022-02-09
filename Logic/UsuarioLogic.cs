@@ -78,6 +78,6 @@ namespace Logic
                 if (usuario != null && item.Id == usuario.Id) siExiste = true;
             }
             return siExiste;
-        }
+        }        
     }
 }

@@ -1,10 +1,52 @@
 using DataAccess;
 using Logic;
 using Microsoft.EntityFrameworkCore;
+using PruebaAPI;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+builder.Host.ConfigureLogging((hostingContext, logging) =>
+                {
+                    logging.ClearProviders()
+                        .AddSerilog(new LoggerConfiguration()
+                            .ReadFrom.Configuration(hostingContext.Configuration, "Logging")
+                            .Enrich.FromLogContext()
+                            //.Enrich.WithThreadId()
+                            //.Enrich.WithProcessId()
+                            //.Enrich.WithMachineName()
+                            //.WriteTo
+                            //.FastConsole(new FastConsoleSinkOptions { UseJson = false })
+                            .WriteTo
+                            .File("events_log.log", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 14)
+                            .CreateLogger()
+                            );
+                });
 
+//public static IHostBuilder CreateHostBuilder(string[] args) =>
+//            Host.CreateDefaultBuilder(args)
+//                .ConfigureLogging((hostingContext, logging) =>
+//                {
+//                    logging.ClearProviders()
+//                        .AddSerilog(new LoggerConfiguration()
+//                            .ReadFrom.Configuration(hostingContext.Configuration, "Logging")
+//                            .Enrich.FromLogContext()
+//                            .Enrich.WithThreadId()
+//                            .Enrich.WithProcessId()
+//                            .Enrich.WithMachineName()
+//                            .WriteTo
+//                            .FastConsole(new FastConsoleSinkOptions { UseJson = false })
+//                            .WriteTo
+//                            .File("events_log.log", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 14)
+//                            .CreateLogger()
+
+//                            );
+
+//                })
+//                .ConfigureWebHostDefaults(webBuilder =>
+//                {
+//                    webBuilder.UseStartup<Startup>();
+//                });
 string connectionString = builder.Configuration.GetConnectionString("DB");
 builder.Services.AddDbContext<UsuarioDB>(options =>
     options.UseMySql(connectionString,
@@ -23,6 +65,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UsuarioLogic>();
 builder.Services.AddScoped<UsuarioDA>();
+builder.Services.AddSingleton<LoggerService>();
 
 var app = builder.Build();
 

@@ -21,7 +21,7 @@ namespace Models
         public DateTime Fecha_creacion { get; set; }
 
         [Column("rol")]
-        public string? Rol { get; set; }
+        public Rol Rol { get; set; }
 
         [Column("fecha_modificacion")]
         public DateTime Fecha_modificacion { get; set; }

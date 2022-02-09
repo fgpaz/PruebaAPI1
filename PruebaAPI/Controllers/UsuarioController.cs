@@ -10,14 +10,20 @@ namespace PruebaAPI.Controllers
     public class UsuarioController : ControllerBase
     {
         private readonly UsuarioLogic _usuarioLogic;
-        public UsuarioController(UsuarioLogic usuarioLogic) 
+        private readonly LoggerService _loggerService;
+        public UsuarioController(UsuarioLogic usuarioLogic, LoggerService loggerService) 
         {
             this._usuarioLogic = usuarioLogic;
+            this._loggerService = loggerService;
         }
 
         // GET: api/Usuarios
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario?>>> GetUsuarios() => await _usuarioLogic.Get();
+        public async Task<ActionResult<IEnumerable<Usuario?>>> GetUsuarios() 
+        {
+            _loggerService.Info("Obteniendo usuario");
+            return await _usuarioLogic.Get(); 
+        }
 
         // Get: api/Usuarios/{id}
         [HttpGet("{id}")]
