@@ -15,7 +15,14 @@ namespace DataAccess
         // Para GET
         public async Task<List<Usuario>> Get()
         {
+            //var query = _usuarioDB.Usuarios.Where(u =>
+            //   u.Email.Contains("gmail"));
+            //query = query.Where(u => u.Nombre.Contains("g"));
+            //query = query.OrderBy(u => u.Nombre);
+            //query = query.Include(u => u.Sbu);
+            //return await query.ToListAsync();
             return await _usuarioDB.Usuarios.ToListAsync();
+
         }
 
         // Para GET/{id}

@@ -15,16 +15,19 @@ namespace Models
         public string? Nombre { get; set; }
 
         [Column("email")]
+        [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
         [Column("fecha_creacion")]
-        public DateTime Fecha_creacion { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime FechaCreacion { get; set; }
 
         [Column("rol")]
         public Rol Rol { get; set; }
 
         [Column("fecha_modificacion")]
-        public DateTime Fecha_modificacion { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime FechaModificacion { get; set; }
 
         [Column("sbu")]
         public string? Sbu { get; set; }

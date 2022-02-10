@@ -23,30 +23,6 @@ builder.Host.ConfigureLogging((hostingContext, logging) =>
                             );
                 });
 
-//public static IHostBuilder CreateHostBuilder(string[] args) =>
-//            Host.CreateDefaultBuilder(args)
-//                .ConfigureLogging((hostingContext, logging) =>
-//                {
-//                    logging.ClearProviders()
-//                        .AddSerilog(new LoggerConfiguration()
-//                            .ReadFrom.Configuration(hostingContext.Configuration, "Logging")
-//                            .Enrich.FromLogContext()
-//                            .Enrich.WithThreadId()
-//                            .Enrich.WithProcessId()
-//                            .Enrich.WithMachineName()
-//                            .WriteTo
-//                            .FastConsole(new FastConsoleSinkOptions { UseJson = false })
-//                            .WriteTo
-//                            .File("events_log.log", rollingInterval: RollingInterval.Day, retainedFileCountLimit: 14)
-//                            .CreateLogger()
-
-//                            );
-
-//                })
-//                .ConfigureWebHostDefaults(webBuilder =>
-//                {
-//                    webBuilder.UseStartup<Startup>();
-//                });
 string connectionString = builder.Configuration.GetConnectionString("DB");
 builder.Services.AddDbContext<UsuarioDB>(options =>
     options.UseMySql(connectionString,
