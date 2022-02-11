@@ -7,31 +7,31 @@ namespace PruebaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class ProyectoController : ControllerBase
     {
-        private readonly UsuarioLogic _usuarioLogic;
+        private readonly ProyectoLogic _proyectoLogic;
         private readonly LoggerService _loggerService;
-        public UsuarioController(UsuarioLogic usuarioLogic, LoggerService loggerService) 
+        public ProyectoController(ProyectoLogic proyectoLogic, LoggerService loggerService) 
         {
-            this._usuarioLogic = usuarioLogic;
+            this._proyectoLogic = proyectoLogic;
             this._loggerService = loggerService;
         }
 
-        // GET: api/Usuarios
+        // GET: api/Proyecto
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Usuario?>>> GetUsuarios() 
+        public async Task<ActionResult<IEnumerable<Proyecto?>>> Get() 
         {
-            _loggerService.Info("Obteniendo usuario");
-            return await _usuarioLogic.Get(); 
+            _loggerService.Info("Obteniendo proyecto");
+            return await _proyectoLogic.Get(); 
         }
 
-        // Get: api/Usuario/{id}
+        // Get: api/Proyecto/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Usuario?>> GetUsuario(long id) 
+        public async Task<ActionResult<Proyecto?>> GetById(string id) 
         {
             try
             {
-                return await _usuarioLogic.GetById(id);
+                return await _proyectoLogic.GetById(id);
             }
             catch (CustomException ce) 
             {
@@ -39,14 +39,14 @@ namespace PruebaAPI.Controllers
             }
         }
 
-        // POST: api/Usuario
+        // POST: api/Proyecto
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Usuario?>> PostUsuario(Usuario usuario)
+        public async Task<ActionResult<Proyecto?>> Post(Proyecto proyecto)
         {
             try
             {
-                return await _usuarioLogic.Create(usuario);
+                return await _proyectoLogic.Create(proyecto);
             }
             catch (CustomException e)
             {
@@ -54,14 +54,14 @@ namespace PruebaAPI.Controllers
             }
         }
 
-        // PUT: api/Usuario/{id}
+        // PUT: api/Proyecto/{id}
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<ActionResult<Usuario?>> PutUsuario([FromRoute] long id, [FromBody] Usuario usuario)
+        public async Task<ActionResult<Proyecto?>> Put([FromRoute] string id, [FromBody] Proyecto proyecto)
         {
             try
             {
-                return await _usuarioLogic.Update(id, usuario);
+                return await _proyectoLogic.Update(id, proyecto);
             }
             catch (CustomException e)
             {
@@ -69,15 +69,15 @@ namespace PruebaAPI.Controllers
             }
         }
 
-        // DELETE: api/Usuario/{id}
+        // DELETE: api/Proyecto/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Usuario?>> DeleteUsuario([FromRoute] long id)
+        public async Task<ActionResult<Proyecto?>> Delete([FromRoute] string id)
         {
             try
             {
-                var usuario = _usuarioLogic.GetById(id);
-                await _usuarioLogic.DeleteUsuario(id);
-                return await usuario;
+                var proyecto = _proyectoLogic.GetById(id);
+                await _proyectoLogic.DeleteFisico(id);
+                return await proyecto;
             }
             catch (CustomException e)
             {

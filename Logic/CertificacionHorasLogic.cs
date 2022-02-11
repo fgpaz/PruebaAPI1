@@ -16,7 +16,7 @@ namespace Logic
         public async Task<List<CertificacionHoras>> Get() => await _certificacionHorasCRUD.Get();
 
         // GET/{id}
-        public async Task<List<CertificacionHoras>> GetById(int id) => await _certificacionHorasCRUD.GetById(id);
+        public async Task<List<CertificacionHoras>?> GetById(int id) => await _certificacionHorasCRUD.GetById(id);
 
         // POST
         public async Task<CertificacionHoras> Create(CertificacionHoras certificacionHoras)
@@ -33,7 +33,7 @@ namespace Logic
         }
 
         // PUT
-        public async Task<CertificacionHoras?> Update(int id, CertificacionHoras certificacionHoras)
+        public async Task<CertificacionHoras?> Update(CertificacionHoras certificacionHoras)
         {
             if (GetById(certificacionHoras.Id) == null)
             {
@@ -47,7 +47,7 @@ namespace Logic
         }
 
         // DELETE
-        public async Task<CertificacionHoras?> Delete(int id)
+        public async Task<CertificacionHoras?> DeleteFisico(int id)
         {
             var certificacionHoras = _certificacionHorasCRUD.GetById(id);
             if (certificacionHoras == null)

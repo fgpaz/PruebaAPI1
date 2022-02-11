@@ -18,7 +18,7 @@ namespace Logic
         public async Task<List<Proyecto>> Get() => await _proyectoCRUD.Get();
 
         // GET/{id}
-        public async Task<Proyecto> GetById(string id) => await _proyectoCRUD.GetById(id);
+        public async Task<Proyecto?> GetById(string id) => await _proyectoCRUD.GetById(id);
 
         // POST
         public async Task<Proyecto> Create(Proyecto proyecto)
@@ -49,7 +49,7 @@ namespace Logic
         }
 
         // DELETE
-        public async Task<Proyecto?> Delete(string id)
+        public async Task<Proyecto?> DeleteFisico(string id)
         {
             var proyecto = _proyectoCRUD.GetById(id);
             if (proyecto.Id == null)

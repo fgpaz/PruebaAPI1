@@ -1,5 +1,4 @@
-﻿using DataAccess;
-using DataAccess.CRUD;
+﻿using DataAccess.CRUD;
 using Models;
 using Models.Exceptions;
 
@@ -18,7 +17,7 @@ namespace Logic
         public async Task<List<CertificacionDevengamiento>> Get() => await _certificacionDevengamientoCRUD.Get();
 
         // GET/{id}
-        public async Task<List<CertificacionDevengamiento>> GetById(int id) => await _certificacionDevengamientoCRUD.GetById(id);
+        public async Task<List<CertificacionDevengamiento>?> GetById(int id) => await _certificacionDevengamientoCRUD.GetById(id);
 
         // POST
         public async Task<CertificacionDevengamiento?> Create(CertificacionDevengamiento certificacionDevengamiento)
@@ -35,7 +34,7 @@ namespace Logic
         }
 
         // PUT
-        public async Task<CertificacionDevengamiento?> Update(int id, CertificacionDevengamiento certificacionDevengamiento)
+        public async Task<CertificacionDevengamiento?> Update(CertificacionDevengamiento certificacionDevengamiento)
         {
             if (GetById(certificacionDevengamiento.Id) == null)
             {
@@ -49,7 +48,7 @@ namespace Logic
         }
 
         // DELETE
-        public async Task<CertificacionDevengamiento?> Delete(int id)
+        public async Task<CertificacionDevengamiento?> DeleteFisico(int id)
         {
             var certificacionDevengamiento = _certificacionDevengamientoCRUD.GetById(id);
             if (certificacionDevengamiento == null)
