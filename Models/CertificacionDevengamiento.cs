@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Models
 {
     [Table("certificacion_devengamiento")]
-    public class CertificacionDevengamiento
+    public class CertificacionDevengamiento : EntidadBase
     {
         [Key]
         [Column("id_certificacion")]
@@ -58,5 +58,5 @@ namespace Models
         [Required]
         [ForeignKey("IdUsuario")]
         public Usuario Usuario { get; set; }
-
     }
+}

@@ -3,16 +3,19 @@ using Models;
 
 namespace DataAccess
 {
-    public partial class UsuarioDB : DbContext
+    public partial class ContextDB : DbContext
     {
-        public UsuarioDB() { }
+        public ContextDB() { }
 
-        public UsuarioDB(DbContextOptions<UsuarioDB> options)
+        public ContextDB(DbContextOptions<ContextDB> options)
             : base(options)
         {
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Proyecto> Proyectos { get; set; }
+        public DbSet<CertificacionHoras> CertificacionHoras { get; set; }
+        public DbSet<CertificacionDevengamiento> CertificacionDevengamientos { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

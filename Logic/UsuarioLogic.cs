@@ -6,8 +6,8 @@ namespace Logic
 {
     public class UsuarioLogic
     {
-        private readonly UsuarioDA _usuarioDA;
-        public UsuarioLogic(UsuarioDA usuarioDA)
+        private readonly UsuarioCRUD _usuarioDA;
+        public UsuarioLogic(UsuarioCRUD usuarioDA)
         {
             this._usuarioDA = usuarioDA;
         }
@@ -16,7 +16,7 @@ namespace Logic
         public async Task<List<Usuario>> Get() => await _usuarioDA.Get();
 
         // GET/{id}
-        public async Task<Usuario?> GetUsuario(long id) => await _usuarioDA.GetUsuario(id);
+        public async Task<Usuario?> GetUsuario(long id) => await _usuarioDA.GetById(id);
 
         // POST
         public async Task<Usuario?> Create(Usuario usuario)
@@ -35,7 +35,7 @@ namespace Logic
         // PUT
         public async Task<Usuario> Update(long id, Usuario usuario)
         {
-            if (_usuarioDA.GetUsuario(id) == null)
+            if (_usuarioDA.GetById(id) == null)
             {
                 throw new NoExisteElElementoException
                 {
@@ -52,7 +52,7 @@ namespace Logic
         // Para DELETE
         public async Task<Usuario?> DeleteUsuario(long id)
         {
-            var usuario = _usuarioDA.GetUsuario(id);
+            var usuario = _usuarioDA.GetById(id);
             if (usuario == null)
             {
                 throw new NoExisteElElementoException
@@ -63,7 +63,7 @@ namespace Logic
             }
             else
             {
-                await _usuarioDA.DeleteUsuario(id);
+                await _usuarioDA.DeleteFisico(id);
             }
             return await usuario;
         }

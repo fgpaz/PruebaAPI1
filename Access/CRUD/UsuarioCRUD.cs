@@ -3,40 +3,40 @@ using Models;
 
 namespace DataAccess
 {
-    public class UsuarioDA
+    public class UsuarioCRUD
     {
-        private readonly UsuarioDB _usuarioDB;
+        private readonly ContextDB _contextDB;
 
-        public UsuarioDA(UsuarioDB usuarioDB)
+        public UsuarioCRUD(ContextDB contextDB)
         {
-            this._usuarioDB = usuarioDB;
+            this._contextDB = contextDB;
         }
 
         // Para GET
         public async Task<List<Usuario>> Get()
         {
-            //var query = _usuarioDB.Usuarios.Where(u =>
+            //var query = _contextDB.Usuarios.Where(u =>
             //   u.Email.Contains("gmail"));
             //query = query.Where(u => u.Nombre.Contains("g"));
             //query = query.OrderBy(u => u.Nombre);
             //query = query.Include(u => u.Sbu);
             //return await query.ToListAsync();
-            return await _usuarioDB.Usuarios.ToListAsync();
+            return await _contextDB.Usuarios.ToListAsync();
 
         }
 
         // Para GET/{id}
-        public async Task<Usuario?> GetUsuario(long id)
+        public async Task<Usuario?> GetById(long id)
         {
-            var usuario = _usuarioDB.Usuarios.FindAsync(id);
+            var usuario = _contextDB.Usuarios.FindAsync(id);
             return await usuario;
         }
 
         // Para POST
         public async Task<Usuario> Create(Usuario usuario)
         {
-            _usuarioDB.Usuarios.Add(usuario);
-            await _usuarioDB.SaveChangesAsync();
+            _contextDB.Usuarios.Add(usuario);
+            await _contextDB.SaveChangesAsync();
             return usuario;
         }
 
@@ -44,17 +44,17 @@ namespace DataAccess
         public async Task<Usuario> Update(long id, Usuario usuario)
         {
             //_todoDb.Entry(todoItem).State = EntityState.Modified;
-            _usuarioDB.Usuarios.Update(usuario);
-            await _usuarioDB.SaveChangesAsync();
+            _contextDB.Usuarios.Update(usuario);
+            await _contextDB.SaveChangesAsync();
             return usuario;
         }
 
-        // Delete fisico
-        public async Task<Usuario?> DeleteUsuario(long id)
+        // DELETE fisico
+        public async Task<Usuario?> DeleteFisico(long id)
         {
-            var usuario = await GetUsuario(id);
-            if (usuario != null) _usuarioDB.Usuarios.Remove(usuario);
-            await _usuarioDB.SaveChangesAsync();
+            var usuario = await GetById(id);
+            if (usuario != null) _contextDB.Usuarios.Remove(usuario);
+            await _contextDB.SaveChangesAsync();
             return usuario;
         }
     }

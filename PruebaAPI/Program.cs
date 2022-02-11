@@ -24,7 +24,7 @@ builder.Host.ConfigureLogging((hostingContext, logging) =>
                 });
 
 string connectionString = builder.Configuration.GetConnectionString("DB");
-builder.Services.AddDbContext<UsuarioDB>(options =>
+builder.Services.AddDbContext<ContextDB>(options =>
     options.UseMySql(connectionString,
                       ServerVersion.AutoDetect(connectionString)),
                     ServiceLifetime.Scoped);
@@ -40,7 +40,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UsuarioLogic>();
-builder.Services.AddScoped<UsuarioDA>();
+builder.Services.AddScoped<UsuarioCRUD>();
 builder.Services.AddSingleton<LoggerService>();
 
 var app = builder.Build();
