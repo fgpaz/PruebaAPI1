@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Models;
 
-namespace DataAccess
+namespace DataAccess.CRUD
 {
     public class UsuarioCRUD
     {

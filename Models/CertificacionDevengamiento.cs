@@ -45,11 +45,11 @@ namespace Models
         [Required]
         [Column("id_proyecto")]
         [StringLength(70)]
-        public string IdProyecto { get; set; }
+        public string? IdProyecto { get; set; }
 
         [Required]
         [ForeignKey("IdProyecto")]
-        public Proyecto Proyecto { get; set; }
+        public Proyecto? Proyecto { get; set; }
 
         [Required]
         [Column("id_usuario")]
@@ -57,6 +57,6 @@ namespace Models
 
         [Required]
         [ForeignKey("IdUsuario")]
-        public Usuario Usuario { get; set; }
+        public Usuario? Usuario { get; set; }
     }
 }

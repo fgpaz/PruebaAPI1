@@ -52,7 +52,7 @@ namespace Logic
         public async Task<Proyecto?> DeleteFisico(string id)
         {
             var proyecto = _proyectoCRUD.GetById(id);
-            if (proyecto.Id == null)
+            if (proyecto == null)
             {
                 throw new NoExisteElElementoException
                 {

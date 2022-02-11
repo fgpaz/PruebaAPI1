@@ -10,7 +10,7 @@ namespace Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("id_proyecto")]
         [StringLength(70)]
-        public string Id { get; set; }
+        public string? Id { get; set; }
         
         [Column("cliente")]
         [StringLength(120)]

@@ -16,7 +16,7 @@ namespace DataAccess.CRUD
         public async Task<List<CertificacionDevengamiento>> Get()
         {
             var query = _contextDB.CertificacionDevengamientos
-                            .Where(cd => cd.Id != null)
+                            .Where(cd => cd != null)
                             .Include(cd => cd.Proyecto)
                             .Include(cd => cd.Usuario);
             return await query.ToListAsync();

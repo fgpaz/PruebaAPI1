@@ -1,0 +1,6 @@
+2022-02-11 17:43:31.128 -03:00 [INF] Obteniendo proyecto
+2022-02-11 17:46:36.241 -03:00 [INF] Obteniendo proyecto
+2022-02-11 17:46:52.183 -03:00 [INF] Obteniendo certificacion de horas
+2022-02-11 17:47:02.284 -03:00 [INF] Obteniendo Certificacion de Devengamiento
+2022-02-11 17:47:08.381 -03:00 [INF] Obteniendo usuario
+2022-02-11 17:49:46.447 -03:00 [INF] Obteniendo usuario
