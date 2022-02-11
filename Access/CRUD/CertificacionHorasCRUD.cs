@@ -48,7 +48,7 @@ namespace DataAccess.CRUD
         }
 
         // DELETE fisico
-        public async Task<CertificacionHoras?> Delete(long id)
+        public async Task<CertificacionHoras?> DeleteFisico(long id)
         {
             var certificacionHoras = await _contextDB.CertificacionHoras.FindAsync(id);
             if (certificacionHoras != null) _contextDB.CertificacionHoras.Remove(certificacionHoras);

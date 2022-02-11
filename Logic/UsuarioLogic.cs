@@ -16,7 +16,7 @@ namespace Logic
         public async Task<List<Usuario>> Get() => await _usuarioDA.Get();
 
         // GET/{id}
-        public async Task<Usuario?> GetUsuario(long id) => await _usuarioDA.GetById(id);
+        public async Task<Usuario?> GetByID(long id) => await _usuarioDA.GetById(id);
 
         // POST
         public async Task<Usuario?> Create(Usuario usuario)

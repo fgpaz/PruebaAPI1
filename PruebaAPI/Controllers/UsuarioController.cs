@@ -31,7 +31,7 @@ namespace PruebaAPI.Controllers
         {
             try
             {
-                return await _usuarioLogic.GetUsuario(id);
+                return await _usuarioLogic.GetByID(id);
             }
             catch (CustomException ce) 
             {
@@ -76,7 +76,7 @@ namespace PruebaAPI.Controllers
         {
             try
             {
-                var usuario = _usuarioLogic.GetUsuario(id);
+                var usuario = _usuarioLogic.GetByID(id);
                 await _usuarioLogic.DeleteUsuario(id);
                 return await usuario;
             }
