@@ -22,15 +22,16 @@ namespace Logic
         // POST
         public async Task<CertificacionDevengamiento?> Create(CertificacionDevengamiento certificacionDevengamiento)
         {
-            if (GetById(certificacionDevengamiento.Id) != null)
-            {
-                throw new ExisteTodoConElMismoNombreException
-                {
-                    Details = "Ya existe este item",
-                    StatusCode = 400
-                };
-            }
-            else return await _certificacionDevengamientoCRUD.Create(certificacionDevengamiento);
+            //if (GetById(certificacionDevengamiento.Id) != null)
+            //{
+            //    throw new ExisteTodoConElMismoNombreException
+            //    {
+            //        Details = "Ya existe este item",
+            //        StatusCode = 400
+            //    };
+            //}
+            //else return await _certificacionDevengamientoCRUD.Create(certificacionDevengamiento);
+            return await _certificacionDevengamientoCRUD.Create(certificacionDevengamiento);
         }
 
         // PUT

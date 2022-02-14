@@ -21,15 +21,16 @@ namespace Logic
         // POST
         public async Task<CertificacionHoras> Create(CertificacionHoras certificacionHoras)
         {
-            if (GetById(certificacionHoras.Id) != null)
-            {
-                throw new ExisteTodoConElMismoNombreException
-                {
-                    Details = "Ya existe este item",
-                    StatusCode = 400
-                };
-            }
-            else return await _certificacionHorasCRUD.Create(certificacionHoras);
+            //if (GetById(certificacionHoras.Id) != null)
+            //{
+            //    throw new ExisteTodoConElMismoNombreException
+            //    {
+            //        Details = "Ya existe este item",
+            //        StatusCode = 400
+            //    };
+            //}
+            //else return await _certificacionHorasCRUD.Create(certificacionHoras);
+            return await _certificacionHorasCRUD.Create(certificacionHoras);
         }
 
         // PUT

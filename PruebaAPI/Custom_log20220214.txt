@@ -1,0 +1,5 @@
+2022-02-14 10:09:57.811 -03:00 [INF] Obteniendo certificacion de horas
+2022-02-14 10:36:59.515 -03:00 [INF] Obteniendo certificacion de horas
+2022-02-14 10:37:16.814 -03:00 [INF] Obteniendo certificacion de horas
+2022-02-14 10:39:07.117 -03:00 [INF] Obteniendo proyecto
+2022-02-14 10:39:34.596 -03:00 [INF] Obteniendo proyecto

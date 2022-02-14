@@ -46,10 +46,12 @@ namespace PruebaAPI.Controllers
         {
             try
             {
+                _loggerService.Info("Creando usuario nuevo");                
                 return await _usuarioLogic.Create(usuario);
             }
             catch (CustomException e)
             {
+                _loggerService.Error(new ObjectResult(new { e.Details }) { StatusCode = e.StatusCode }.ToString());
                 return new ObjectResult(new { e.Details }) { StatusCode = e.StatusCode };
             }
         }

@@ -23,15 +23,16 @@ namespace Logic
         // POST
         public async Task<Proyecto> Create(Proyecto proyecto)
         {
-            if (GetById(proyecto.Id) != null)
-            {
-                throw new ExisteTodoConElMismoNombreException
-                {
-                    Details = "Ya existe este item",
-                    StatusCode = 400
-                };
-            }
-            else return await _proyectoCRUD.Create(proyecto);
+            //if (GetById(proyecto.Id) != null)
+            //{
+            //    throw new ExisteTodoConElMismoNombreException
+            //    {
+            //        Details = "Ya existe este item",
+            //        StatusCode = 400
+            //    };
+            //}
+            //else return await _proyectoCRUD.Create(proyecto);
+            return await _proyectoCRUD.Create(proyecto);
         }
 
         // PUT

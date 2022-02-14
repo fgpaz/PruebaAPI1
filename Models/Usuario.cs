@@ -7,7 +7,7 @@ namespace Models
     public class Usuario : EntidadBase
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("id_usuario")]
         public int Id { get; set; }
 

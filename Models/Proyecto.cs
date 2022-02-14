@@ -7,7 +7,7 @@ namespace Models
     public class Proyecto : EntidadBase
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Column("id_proyecto")]
         [StringLength(70)]
         public string? Id { get; set; }
