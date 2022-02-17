@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Models
 {
     [Table("proyectos")]
-    public class Proyecto : EntidadBase
+    public class Proyecto
     {
         [Key]
         //[DatabaseGenerated(DatabaseGeneratedOption.None)]
